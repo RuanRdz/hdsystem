@@ -1,5 +1,5 @@
 {
-	"title": "Sistema de Controle de Ordens de Serviço",
+	"title": "MAPOS - Sistema de Controle de Ordens de Serviço",
 	"extensions": [
 		"cURL",
 		"MySQLi",
