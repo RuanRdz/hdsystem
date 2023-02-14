@@ -174,7 +174,7 @@
                                     <div class="span12" style="padding: 0; margin-left: 0">
                                         <div class="span6 offset3" style="display:flex;justify-content: center">
                                             <button class="button btn btn-primary" id="btnContinuar"><span class="button__icon"><i class="bx bx-sync"></i></span><span class="button__text2">Atualizar</span></button>
-                                            <a href="<?php echo base_url() ?>index.php/os" class="button btn btn-mini btn-warning"><span class="button__icon"><i class="bx bx-undo"></i></span> <span class="button__text2">Voltar</span></a>
+                                            <a href="<?php echo base_url() ?>os" class="button btn btn-mini btn-warning"><span class="button__icon"><i class="bx bx-undo"></i></span> <span class="button__text2">Voltar</span></a>
                                         </div>
                                     </div>
                                 </form>
@@ -198,7 +198,7 @@ foreach ($servicos as $s) {
 
                         <div class="tab-pane" id="tab2">
                             <div class="span12 well" style="padding: 1%; margin-left: 0">
-                                <form id="formDesconto" action="<?php echo base_url(); ?>index.php/os/adicionarDesconto" method="POST">
+                                <form id="formDesconto" action="<?php echo base_url(); ?>os/adicionarDesconto" method="POST">
                                     <div id="divValorTotal">
                                         <div class="span2">
                                             <label for="">Valor Total Da OS:</label>
@@ -235,7 +235,7 @@ foreach ($servicos as $s) {
                         <!--Produtos-->
                         <div class="tab-pane" id="tab3">
                             <div class="span12 well" style="padding: 1%; margin-left: 0">
-                                <form id="formProdutos" action="<?php echo base_url() ?>index.php/os/adicionarProduto" method="post">
+                                <form id="formProdutos" action="<?php echo base_url() ?>os/adicionarProduto" method="post">
                                     <div class="span6">
                                         <input type="hidden" name="idProduto" id="idProduto" />
                                         <input type="hidden" name="idOsProduto" id="idOsProduto" value="<?php echo $result->idOs; ?>" />
@@ -300,7 +300,7 @@ foreach ($produtos as $p) {
                         <!--Serviços-->
                         <div class="tab-pane" id="tab4">
                             <div class="span12 well" style="padding: 1%; margin-left: 0">
-                                <form id="formServicos" action="<?php echo base_url() ?>index.php/os/adicionarServico" method="post">
+                                <form id="formServicos" action="<?php echo base_url() ?>os/adicionarServico" method="post">
                                     <div class="span6">
                                         <input type="hidden" name="idServico" id="idServico" />
                                         <input type="hidden" name="idOsServico" id="idOsServico" value="<?php echo $result->idOs; ?>" />
@@ -702,7 +702,7 @@ foreach ($servicos as $s) {
                 } else if (qtdTotalProdutosServicos > 0) {
                     $.ajax({
                         type: "POST",
-                        url: "<?php echo base_url(); ?>index.php/os/faturar",
+                        url: "<?php echo base_url(); ?>os/faturar",
                         data: dados,
                         dataType: 'json',
                         success: function(data) {
@@ -749,7 +749,7 @@ foreach ($servicos as $s) {
                             text: response.messages
                         });
                         setTimeout(function() {
-                            window.location.href = window.BaseUrl + 'index.php/os/editar/' + <?php echo $result->idOs ?>;
+                            window.location.href = window.BaseUrl + 'os/editar/' + <?php echo $result->idOs ?>;
                         }, 2000);
                     } else {
                         Swal.fire({
@@ -805,7 +805,7 @@ foreach ($servicos as $s) {
                 $('#btn-cancelar-faturar').trigger('click');
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo base_url(); ?>index.php/os/faturar",
+                    url: "<?php echo base_url(); ?>os/faturar",
                     data: dados,
                     dataType: 'json',
                     success: function(data) {
@@ -828,7 +828,7 @@ foreach ($servicos as $s) {
         });
 
         $("#produto").autocomplete({
-            source: "<?php echo base_url(); ?>index.php/os/autoCompleteProduto",
+            source: "<?php echo base_url(); ?>os/autoCompleteProduto",
             minLength: 2,
             select: function(event, ui) {
                 $("#codDeBarra").val(ui.item.codbar);
@@ -840,7 +840,7 @@ foreach ($servicos as $s) {
         });
 
         $("#servico").autocomplete({
-            source: "<?php echo base_url(); ?>index.php/os/autoCompleteServico",
+            source: "<?php echo base_url(); ?>os/autoCompleteServico",
             minLength: 2,
             select: function(event, ui) {
                 $("#idServico").val(ui.item.id);
@@ -851,7 +851,7 @@ foreach ($servicos as $s) {
 
 
         $("#cliente").autocomplete({
-            source: "<?php echo base_url(); ?>index.php/os/autoCompleteCliente",
+            source: "<?php echo base_url(); ?>os/autoCompleteCliente",
             minLength: 2,
             select: function(event, ui) {
                 $("#clientes_id").val(ui.item.id);
@@ -859,7 +859,7 @@ foreach ($servicos as $s) {
         });
 
         $("#tecnico").autocomplete({
-            source: "<?php echo base_url(); ?>index.php/os/autoCompleteUsuario",
+            source: "<?php echo base_url(); ?>os/autoCompleteUsuario",
             minLength: 2,
             select: function(event, ui) {
                 $("#usuarios_id").val(ui.item.id);
@@ -867,7 +867,7 @@ foreach ($servicos as $s) {
         });
 
         $("#termoGarantia").autocomplete({
-            source: "<?php echo base_url(); ?>index.php/os/autoCompleteTermoGarantia",
+            source: "<?php echo base_url(); ?>os/autoCompleteTermoGarantia",
             minLength: 1,
             select: function(event, ui) {
                 if (ui.item.id) {
@@ -957,7 +957,7 @@ foreach ($servicos as $s) {
                     $("#divProdutos").html("<div class='progress progress-info progress-striped active'><div class='bar' style='width: 100%'></div></div>");
                     $.ajax({
                         type: "POST",
-                        url: "<?php echo base_url(); ?>index.php/os/adicionarProduto",
+                        url: "<?php echo base_url(); ?>os/adicionarProduto",
                         data: dados,
                         dataType: 'json',
                         success: function(data) {
@@ -1012,7 +1012,7 @@ foreach ($servicos as $s) {
                 $("#divServicos").html("<div class='progress progress-info progress-striped active'><div class='bar' style='width: 100%'></div></div>");
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo base_url(); ?>index.php/os/adicionarServico",
+                    url: "<?php echo base_url(); ?>os/adicionarServico",
                     data: dados,
                     dataType: 'json',
                     success: function(data) {
@@ -1054,7 +1054,7 @@ foreach ($servicos as $s) {
 
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo base_url(); ?>index.php/os/adicionarAnotacao",
+                    url: "<?php echo base_url(); ?>os/adicionarAnotacao",
                     data: dados,
                     dataType: 'json',
                     success: function(data) {
@@ -1084,7 +1084,7 @@ foreach ($servicos as $s) {
                 $("#divAnexos").html("<div class='progress progress-info progress-striped active'><div class='bar' style='width: 100%'></div></div>");
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo base_url(); ?>index.php/os/anexar",
+                    url: "<?php echo base_url(); ?>os/anexar",
                     data: dados,
                     mimeType: "multipart/form-data",
                     contentType: false,
@@ -1118,7 +1118,7 @@ foreach ($servicos as $s) {
                 $("#divProdutos").html("<div class='progress progress-info progress-striped active'><div class='bar' style='width: 100%'></div></div>");
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo base_url(); ?>index.php/os/excluirProduto",
+                    url: "<?php echo base_url(); ?>os/excluirProduto",
                     data: "idProduto=" + idProduto + "&quantidade=" + quantidade + "&produto=" + produto + "&idOs=" + idOS,
                     dataType: 'json',
                     success: function(data) {
@@ -1149,7 +1149,7 @@ foreach ($servicos as $s) {
                 $("#divServicos").html("<div class='progress progress-info progress-striped active'><div class='bar' style='width: 100%'></div></div>");
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo base_url(); ?>index.php/os/excluirServico",
+                    url: "<?php echo base_url(); ?>os/excluirServico",
                     data: "idServico=" + idServico + "&idOs=" + idOS,
                     data: "idServico=" + idServico,
                     dataType: 'json',
@@ -1177,11 +1177,11 @@ foreach ($servicos as $s) {
             event.preventDefault();
             var link = $(this).attr('link');
             var id = $(this).attr('imagem');
-            var url = '<?php echo base_url(); ?>index.php/os/excluirAnexo/';
+            var url = '<?php echo base_url(); ?>os/excluirAnexo/';
             $("#div-visualizar-anexo").html('<img src="' + link + '" alt="">');
             $("#excluir-anexo").attr('link', url + id);
 
-            $("#download").attr('href', "<?php echo base_url(); ?>index.php/os/downloadanexo/" + id);
+            $("#download").attr('href', "<?php echo base_url(); ?>os/downloadanexo/" + id);
 
         });
 
@@ -1218,7 +1218,7 @@ foreach ($servicos as $s) {
                 $("#divAnotacoes").html("<div class='progress progress-info progress-striped active'><div class='bar' style='width: 100%'></div></div>");
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo base_url(); ?>index.php/os/excluirAnotacao",
+                    url: "<?php echo base_url(); ?>os/excluirAnotacao",
                     data: "idAnotacao=" + idAnotacao + "&idOs=" + idOS,
                     dataType: 'json',
                     success: function(data) {

@@ -107,7 +107,7 @@
                                         <div class="span6 offset3" style="display:flex">
                                             <button class="button btn btn-success" id="btnContinuar">
                                               <span class="button__icon"><i class='bx bx-chevrons-right'></i></span><span class="button__text2">Continuar</span></button>
-                                            <a href="<?php echo base_url() ?>index.php/os" class="button btn btn-mini btn-warning" style="max-width: 160px">
+                                            <a href="<?php echo base_url() ?>os" class="button btn btn-mini btn-warning" style="max-width: 160px">
                                               <span class="button__icon"><i class="bx bx-undo"></i></span><span class="button__text2">Voltar</span></a>
                                         </div>
                                     </div>
@@ -124,21 +124,21 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $("#cliente").autocomplete({
-            source: "<?php echo base_url(); ?>index.php/os/autoCompleteCliente",
+            source: "<?php echo base_url(); ?>os/autoCompleteCliente",
             minLength: 1,
             select: function(event, ui) {
                 $("#clientes_id").val(ui.item.id);
             }
         });
         $("#tecnico").autocomplete({
-            source: "<?php echo base_url(); ?>index.php/os/autoCompleteUsuario",
+            source: "<?php echo base_url(); ?>os/autoCompleteUsuario",
             minLength: 1,
             select: function(event, ui) {
                 $("#usuarios_id").val(ui.item.id);
             }
         });
         $("#termoGarantia").autocomplete({
-            source: "<?php echo base_url(); ?>index.php/os/autoCompleteTermoGarantia",
+            source: "<?php echo base_url(); ?>os/autoCompleteTermoGarantia",
             minLength: 1,
             select: function(event, ui) {
                 $("#garantias_id").val(ui.item.id);

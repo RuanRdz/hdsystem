@@ -34,38 +34,38 @@
     .control-group.error .help-inline {
             display: flex;
         }
-        
+
         .form-horizontal .control-group {
             border-bottom: 1px solid #ffffff;
         }
-        
+
         .form-horizontal .controls {
             margin-left   : 20px;
             padding-bottom: 8px 0;
         }
-    
+
         .form-horizontal .control-label {
             text-align : left;
             padding-top: 15px;
         }
-    
+
         .nopadding {
             padding     : 0 20px !important;
             margin-right: 20px;
         }
-    
+
         .widget-title h5 {
             padding-bottom : 30px;
             text-align-last: left;
             font-size      : 2em;
             font-weight    : 500;
         }
-    
+
         @media (max-width: 480px) {
             form {
                 display: contents !important;
             }
-        
+
             .form-horizontal .control-label {
                 margin-bottom: -6px;
             }
@@ -195,7 +195,7 @@
                     <div class="span12">
                         <div class="span6 offset3" style="display:flex;justify-content: center">
                             <button type="submit" class="button btn btn-mini btn-success"><span class="button__icon"><i class='bx bx-save'></i></span> <span class="button__text2">Salvar</span></a></button>
-                            <a title="Voltar" class="button btn btn-warning" href="<?php echo site_url() ?>/clientes"><span class="button__icon"><i class="bx bx-undo"></i></span> <span class="button__text2">Voltar</span></a>
+                            <a title="Voltar" class="button btn btn-warning" href="<?php echo site_url() ?>clientes"><span class="button__icon"><i class="bx bx-undo"></i></span> <span class="button__text2">Voltar</span></a>
                         </div>
                     </div>
                 </div>

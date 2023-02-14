@@ -72,9 +72,9 @@
                                             } ?>
                                             <button class="button btn btn-primary" id="btnContinuar">
                                                 <span class="button__icon"><i class="bx bx-sync"></i></span><span class="button__text2">Atualizar</span></button>
-                                            <a href="<?php echo base_url() ?>index.php/vendas/visualizar/<?php echo $result->idVendas; ?>" class="button btn btn-primary">
+                                            <a href="<?php echo base_url() ?>vendas/visualizar/<?php echo $result->idVendas; ?>" class="button btn btn-primary">
                                                 <span class="button__icon"><i class="bx bx-show"></i></span><span class="button__text2">Visualizar</span></a>
-                                            <a href="<?php echo base_url() ?>index.php/vendas" class="button btn btn-warning">
+                                            <a href="<?php echo base_url() ?>vendas" class="button btn btn-warning">
                                                 <span class="button__icon"><i class="bx bx-undo"></i></span> <span class="button__text2">Voltar</span></a>
                                         </div>
                                     </div>
@@ -84,7 +84,7 @@
                         <div class="tab-pane" id="tab2">
                             <div class="span12 well" style="padding: 1%; margin-left: 0">
                                 <div class="span11">
-                                    <form id="formProdutos" action="<?php echo base_url(); ?>index.php/vendas/adicionarProduto" method="post">
+                                    <form id="formProdutos" action="<?php echo base_url(); ?>vendas/adicionarProduto" method="post">
                                         <div class="span6">
                                             <input type="hidden" name="idProduto" id="idProduto" />
                                             <input type="hidden" name="idVendasProduto" id="idVendasProduto" value="<?php echo $result->idVendas ?>" />
@@ -108,7 +108,7 @@
                                     </form>
                                 </div>
                                 <div class="span11">
-                                    <form id="formDesconto" action="<?php echo base_url(); ?>index.php/vendas/adicionarDesconto" method="POST">
+                                    <form id="formDesconto" action="<?php echo base_url(); ?>vendas/adicionarDesconto" method="POST">
                                         <div class="span1">
                                             <input type="hidden" name="idVendas" id="idVendas" value="<?php echo $result->idVendas; ?>" />
                                             <label for="">Desconto</label>
@@ -268,7 +268,7 @@ foreach ($produtos as $p) {
 </div>
 <script src="<?php echo base_url(); ?>assets/js/maskmoney.js"></script>
 <script type="text/javascript">
-    
+
     $("#quantidade").keyup(function() {
         this.value = this.value.replace(/[^0-9.]/g, '');
     });
@@ -393,7 +393,7 @@ foreach ($produtos as $p) {
                         $("#desconto").val("");
                         $("#resultado").val("");
                         /*setTimeout(function() {
-                            window.location.href = window.BaseUrl + 'index.php/vendas/editar/' + <?php echo $result->idVendas ?>;
+                            window.location.href = window.BaseUrl + 'vendas/editar/' + <?php echo $result->idVendas ?>;
                         }, 2000);*/
                     } else {
                         Swal.fire({
@@ -463,7 +463,7 @@ foreach ($produtos as $p) {
                 } else if (qtdProdutos > 0) {
                     $.ajax({
                         type: "POST",
-                        url: "<?php echo base_url(); ?>index.php/vendas/faturar",
+                        url: "<?php echo base_url(); ?>vendas/faturar",
                         data: dados,
                         dataType: 'json',
                         success: function(data) {
@@ -485,7 +485,7 @@ foreach ($produtos as $p) {
             }
         });
         $("#produto").autocomplete({
-            source: "<?php echo base_url(); ?>index.php/os/autoCompleteProdutoSaida",
+            source: "<?php echo base_url(); ?>os/autoCompleteProdutoSaida",
             minLength: 2,
             select: function(event, ui) {
                 $("#idProduto").val(ui.item.id);
@@ -495,14 +495,14 @@ foreach ($produtos as $p) {
             }
         });
         $("#cliente").autocomplete({
-            source: "<?php echo base_url(); ?>index.php/os/autoCompleteCliente",
+            source: "<?php echo base_url(); ?>os/autoCompleteCliente",
             minLength: 2,
             select: function(event, ui) {
                 $("#clientes_id").val(ui.item.id);
             }
         });
         $("#tecnico").autocomplete({
-            source: "<?php echo base_url(); ?>index.php/os/autoCompleteUsuario",
+            source: "<?php echo base_url(); ?>os/autoCompleteUsuario",
             minLength: 2,
             select: function(event, ui) {
                 $("#usuarios_id").val(ui.item.id);
@@ -577,7 +577,7 @@ foreach ($produtos as $p) {
                     $("#divProdutos").html("<div class='progress progress-info progress-striped active'><div class='bar' style='width: 100%'></div></div>");
                     $.ajax({
                         type: "POST",
-                        url: "<?php echo base_url(); ?>index.php/vendas/adicionarProduto",
+                        url: "<?php echo base_url(); ?>vendas/adicionarProduto",
                         data: dados,
                         dataType: 'json',
                         success: function(data) {
@@ -611,7 +611,7 @@ foreach ($produtos as $p) {
                 $("#divProdutos").html("<div class='progress progress-info progress-striped active'><div class='bar' style='width: 100%'></div></div>");
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo base_url(); ?>index.php/vendas/excluirProduto",
+                    url: "<?php echo base_url(); ?>vendas/excluirProduto",
                     data: "idProduto=" + idProduto + "&idVendas=" + <?= $result->idVendas ?> + "&quantidade=" + quantidade + "&produto=" + produto,
                     dataType: 'json',
                     success: function(data) {

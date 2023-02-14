@@ -127,7 +127,7 @@ $periodo = $this->input->get('periodo');
                         }
                         foreach ($results as $r) {
                             $vencimento = date(('d/m/Y'), strtotime($r->data_vencimento));
-                           
+
                             if ($r->baixado == 0) {
                                 $status = 'Pendente';
                             } else {
@@ -150,7 +150,7 @@ $periodo = $this->input->get('periodo');
                             echo '<td> R$ ' . number_format($r->valor, 2, ',', '.') . '</td>'; //valor total sem o desconto
                             echo  $r->tipo_desconto == "real" ? '<td>' . "R$ ".$r->desconto . '</td>' : ($r->tipo_desconto == "porcento" ? '<td>' . $r->desconto." %" . '</td>' : '<td>' . "-" . '</td>'); // valor do desconto
                             echo '<td> R$ ' . number_format($r->valor_desconto, 2, ',', '.') . '</td>'; // valor total  com o desconto
-                           
+
                             echo '<td>';
                             if ($r->data_pagamento == "0000-00-00") {
                                 $data_pagamento = "";
@@ -188,10 +188,10 @@ $periodo = $this->input->get('periodo');
                                 <strong>R$ <?php echo number_format($totals['receitas'] - $totals['despesas'], 2, ',', '.') ?></strong>
                             </td>
                         </tr>
-                    
+
                         <tr>
                             <td colspan="7" style="text-align: left;"><strong>Estatísticas Gerais do Financeiro:</strong></td>
-                        </tr> 
+                        </tr>
                         <tr>
                       <td colspan="7" style="text-align: left; color: green">Total Receitas (Pagas): R$ <?php echo number_format($estatisticas_financeiro->total_receita, 2, ',', '.'); ?></td>
                       </tr>
@@ -247,7 +247,7 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
 
 <!-- Modal nova receita e despesa -->
 <div id="modalReceita" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form id="formReceita" action="<?php echo base_url() ?>index.php/financeiro/adicionarReceita" method="post">
+    <form id="formReceita" action="<?php echo base_url() ?>financeiro/adicionarReceita" method="post">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Adicionar Receita/Despesa</h3>
@@ -262,7 +262,7 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
 		    		<label for="tipo">Tipo</label>
 		    		<select name="tipo" id="tipo" class="span10">
 		    			<option value="receita">Receita</option>
-		    			<option value="despesa">Despesa</option>				
+		    			<option value="despesa">Despesa</option>
 		    		</select>
 	    	</div>
 
@@ -290,13 +290,13 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
                     <input class="span12 money" id="valor" type="text" name="valor" data-affixes-stay="true" data-thousands="" data-decimal="." required />
                 </div>
 
-        <div class="span4">  
+        <div class="span4">
 	        <label for="descontos">Desconto</label>
 	        <input class="span6 money" id="descontos" type="text" name="descontos" value="" placeholder="em R$" style="float: left;" />
             <input class="btn btn-inverse" onclick="mostrarValores();" type="button" name="valor_desconto" value="Aplicar" placeholder="R$" style="margin-left:3px; width: 70px;" />
 	      </div>
-		            
-          <div class="span3">  
+
+          <div class="span3">
           <label for="valor_desconto">Val.Desc <i class="icon-info-sign tip-left" title="Não altere esta campo, caso clicar nele e sair e ficar vázio, terá que recarregar á pagina e inserir de novo"></i></label>
           <input class="span12 money" id="valor_desconto" readOnly="true" title="Não altere este campo" type="text" name="valor_desconto" value="<?php echo number_format("0.00", 2, ',', '.') ?>"/>
         </div>
@@ -310,28 +310,28 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
 		    		<label for="qtdparcelas">Qtd Parcelas</label>
 		    		<select name="qtdparcelas" id="qtdparcelas" class="span10">
 		    			<option value="0">Pagamento á vista</option>
-		    			<option value="1">1x</option>			
-		    			<option value="2">2x</option>			
-		    			<option value="3">3x</option>			
-		    			<option value="4">4x</option>			
-		    			<option value="5">5x</option>			
-		    			<option value="6">6x</option>			
-		    			<option value="7">7x</option>			
-		    			<option value="8">8x</option>			
-		    			<option value="9">9x</option>			
-		    			<option value="10">10x</option>			
-		    			<option value="11">11x</option>			
-		    			<option value="12">12x</option>			
+		    			<option value="1">1x</option>
+		    			<option value="2">2x</option>
+		    			<option value="3">3x</option>
+		    			<option value="4">4x</option>
+		    			<option value="5">5x</option>
+		    			<option value="6">6x</option>
+		    			<option value="7">7x</option>
+		    			<option value="8">8x</option>
+		    			<option value="9">9x</option>
+		    			<option value="10">10x</option>
+		    			<option value="11">11x</option>
+		    			<option value="12">12x</option>
 		    		</select>
-		    	<a href="#modalReceitaParcelada" id="abrirmodalreceitaparcelada" data-toggle="modal" style="display: none;" role="button"> </a>   
-	    	</div>    
+		    	<a href="#modalReceitaParcelada" id="abrirmodalreceitaparcelada" data-toggle="modal" style="display: none;" role="button"> </a>
+	    	</div>
             <div class="span3" style="margin-left: 0">
                 <div class="span3" style="margin-left: 0">
                     <label for="recebido">Recebido?</label>
                   <input id="recebido" type="checkbox" name="recebido" value="1" />
                 </div>
             </div>
-            
+
                 <div id="divRecebimento" class="span8" style="display: none; margin-left: 0">
                     <div class="span6" style="margin-left: 0">
                         <label for="recebimento">Data Recebimento</label>
@@ -345,12 +345,12 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
                             <option value="Boleto">Boleto</option>
                             <option value="Cartão de Crédito">Cartão de Crédito</option>
                             <option value="Cartão de Débito">Cartão de Débito</option>
-                            <option value="Cheque">Cheque</option> 
-                            <option value="Cheque Pré-datado">Cheque Pré-datado</option> 
+                            <option value="Cheque">Cheque</option>
+                            <option value="Cheque Pré-datado">Cheque Pré-datado</option>
                             <option value="Depósito">Depósito</option>
                             <option value="Transferência DOC">Transferência DOC</option>
                             <option value="Transferência TED">Transferência TED</option>
-                            <option value="Promissória">Promissória</option> 
+                            <option value="Promissória">Promissória</option>
                         </select>
                     </div>
                 </div>
@@ -369,68 +369,68 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
 
 <!-- Modal nova receita e despesa parcelada -->
 <div id="modalReceitaParcelada" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <form id="formReceita_parc" action="<?php echo base_url() ?>index.php/financeiro/adicionarReceita_parc" method="post">
+  <form id="formReceita_parc" action="<?php echo base_url() ?>financeiro/adicionarReceita_parc" method="post">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">Adicionar Receita/Despesa Parcelada</h3>
   </div>
-  <div class="modal-body">	
+  <div class="modal-body">
   		<div class="span12 alert alert-info" style="margin-left: 0"> Obrigatório o preenchimento dos campos com asterisco.</div>
           <div class="span3" style="margin-left: 0">
 		    		<label for="tipo_parc" style="margin-left: 0">Tipo</label>
 		    		<select name="tipo_parc" id="tipo_parc" class="span10">
 		    			<option value="receita">Receita</option>
-		    			<option value="despesa">Despesa</option>				
+		    			<option value="despesa">Despesa</option>
 		    		</select>
 	    	</div>
-          <div class="span6" style="margin-left: 0"> 
+          <div class="span6" style="margin-left: 0">
     		<label for="descricao_parc">Descrição/Referência*</label>
     		<input class="span12" id="descricao_parc" type="text" name="descricao_parc" required />
     		<input id="urlAtual" type="hidden" name="urlAtual" value="<?php echo current_url() ?>"/>
-    	</div>	
-    	        
-    		<div class="span6" style="margin-left: 0"> 
+    	</div>
+
+    		<div class="span6" style="margin-left: 0">
     			<label for="cliente_parc">Cliente/Fornecedor*</label>
     			<input class="span11" id="cliente_parc" type="text" name="cliente_parc" required />
     		</div>
-		
+
 			<div class="span6" style="margin-left: 0">
           <label for="observacoes_parc">Observações</label>
           <textarea class="span12" id="observacoes_parc" name="observacoes_parc"></textarea>
-        </div>	
-	  
-    	<div class="span12" style="margin-left: 0"> 
-        		<div class="span3" style="margin-left: 0">  
+        </div>
+
+    	<div class="span12" style="margin-left: 0">
+        		<div class="span3" style="margin-left: 0">
     			<label for="valor_parc">Valor*</label>
     			<input class="span12 money" id="valor_parc" type="text" name="valor_parc" required />
     		</div>
 
-          <div class="span4" style="margin-left: 2">  
+          <div class="span4" style="margin-left: 2">
 	        <label for="descontos_parc">Desconto</label>
 	        <input class="span6 money" id="descontos_parc" type="text" name="descontos_parc" value="" placeholder="em R$" style="float: left;" />
             <input class="btn btn-inverse" onclick="mostrarValoresParc();" type="button" name="desconto_parc" value="Aplicar" placeholder="R$" style="width: 70px; margin-left:3px;" />
 	      </div>
-		         
-          <div class="span3" style="margin-left: 0">  
+
+          <div class="span3" style="margin-left: 0">
 	        <label for="desconto_parc">Desconto <i class="icon-info-sign tip-left" title="Não altere esta campo, caso clicar nele e sair e ficar vázio, terá que recarregar á pagina e inserir de novo"></i></label>
             <input class="span6 money"  id="desconto_parc" readOnly="true" title="Não altere este campo" type="text" name="desconto_parc" value="<?php echo number_format("0.00", 2, ',', '.') ?>" style="float: left;" />
 	      </div>
-			
+
     		<div id="divParcelamento" class="span2" style="margin-left: 0">
 		    		<label for="qtdparcelas_parc">Parcelas</label>
 		    		<select name="qtdparcelas_parc" id="qtdparcelas_parc" class="span12" style="margin-left: 0">
 		    			<option value="1">1x</option>
-		    			<option value="2">2x</option>			
-		    			<option value="3">3x</option>			
-		    			<option value="4">4x</option>			
-		    			<option value="5">5x</option>			
-		    			<option value="6">6x</option>			
-		    			<option value="7">7x</option>			
-		    			<option value="8">8x</option>			
-		    			<option value="9">9x</option>			
-		    			<option value="10">10x</option>			
-		    			<option value="11">11x</option>			
-		    			<option value="12">12x</option>			
+		    			<option value="2">2x</option>
+		    			<option value="3">3x</option>
+		    			<option value="4">4x</option>
+		    			<option value="5">5x</option>
+		    			<option value="6">6x</option>
+		    			<option value="7">7x</option>
+		    			<option value="8">8x</option>
+		    			<option value="9">9x</option>
+		    			<option value="10">10x</option>
+		    			<option value="11">11x</option>
+		    			<option value="12">12x</option>
 		    		</select>
 	    	</div>
 
@@ -442,8 +442,8 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
                             <option value="Boleto">Boleto</option>
                             <option value="Cartão de Crédito">Cartão de Crédito</option>
                             <option value="Cartão de Débito">Cartão de Débito</option>
-                            <option value="Cheque">Cheque</option> 
-                            <option value="Cheque Pré-datado">Cheque Pré-datado</option> 
+                            <option value="Cheque">Cheque</option>
+                            <option value="Cheque Pré-datado">Cheque Pré-datado</option>
                             <option value="Depósito">Depósito</option>
                             <option value="Transferência DOC">Transferência DOC</option>
                             <option value="Transferência TED">Transferência TED</option>
@@ -452,7 +452,7 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
 	    	</div>
     	</div>
 
-	    <div class="span12" style="margin-left: 0;"> 
+	    <div class="span12" style="margin-left: 0;">
 	    	<div class="span4">
 	    		<label for="entrada">Entrada <i class="icon-info-sign tip-right" title="O valor da entrada será lançado como pago no dia atual (Hoje)"></i></label>
 	    		<input class="span12 money" id="entrada" type="text" name="entrada" value="0" />
@@ -462,7 +462,7 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
 	    		<label for="dia_pgto">Data da Entrada*</label>
 	    		<input class="span12 datepicker" id="dia_pgto" type="text" name="dia_pgto" value="<?php echo date('d/m/Y'); ?>"  autocomplete="off"  required/>
 	    	</div>
-	    	
+
 	    	<div class="span4" style="margin-left: 1">
 	    		<label for="dia_base_pgto">Data Base de Pgto* <i class="icon-info-sign tip-left" title="Dia do mês que serão lançadas as parcelas restantes, iniciando-se pela data selecionada."></i></label>
 	    		<input class="span12 datepicker" id="dia_base_pgto" type="text" autocomplete="off" name="dia_base_pgto" required  />
@@ -474,7 +474,7 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
 		    		<label id="string_parc" style="font-weight: bold;"></label>
 		    	</div>
 	    	</div>
-            
+
 	    </div>
         </div>
         <div class="modal-footer" style="display:flex;justify-content: center">
@@ -486,7 +486,7 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
 
 <!-- Modal nova despesa (NAO É UTILIZADO MAIS ESSE MODAL)
 <div id="modalDespesa" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form id="formDespesa" action="<?php // echo base_url()?>index.php/financeiro/adicionarDespesa" method="post">
+    <form id="formDespesa" action="<?php // echo base_url()?>financeiro/adicionarDespesa" method="post">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">MapOS - Adicionar Despesa</h3>
@@ -565,7 +565,7 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
 
 <!-- Modal editar lançamento -->
 <div id="modalEditar" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form id="formEditar" action="<?php echo base_url() ?>index.php/financeiro/editar" method="post">
+    <form id="formEditar" action="<?php echo base_url() ?>financeiro/editar" method="post">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">Editar Lançamento</h3>
@@ -597,13 +597,13 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
                     <input class="span12 money" type="text" name="valor" id="valorEditar" value="<?php echo number_format("0.00", 2, ',', '.') ?>" required />
                 </div>
 
-        <div class="span4">  
+        <div class="span4">
 	        <label for="descontos">Desconto</label>
 	        <input class="span6 money" id="descontos_editar" type="text" name="descontos_editar" value="" placeholder="em R$" style="float: left;" />
             <input class="btn btn-inverse" onclick="mostrarValoresEditar();" type="button" name="valor_desconto_editar" value="Aplicar" placeholder="R$" style="width: 70px; margin-left:3px;" />
 	      </div>
 
-            <div class="span2">  
+            <div class="span2">
             <label for="valor_desconto">Val.Desc</label>
             <input class="span12 money" id="descontoEditar" name="valor_desconto_editar" type="text" value="<?php echo number_format("0.00", 2, ',', '.') ?>" />
             </div>
@@ -640,8 +640,8 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
                             <option value="Boleto">Boleto</option>
                             <option value="Cartão de Crédito">Cartão de Crédito</option>
                             <option value="Cartão de Débito">Cartão de Débito</option>
-                            <option value="Cheque">Cheque</option> 
-                            <option value="Cheque Pré-datado">Cheque Pré-datado</option> 
+                            <option value="Cheque">Cheque</option>
+                            <option value="Cheque Pré-datado">Cheque Pré-datado</option>
                             <option value="Depósito">Depósito</option>
                             <option value="Transferência DOC">Transferência DOC</option>
                             <option value="Transferência TED">Transferência TED</option>
@@ -688,38 +688,38 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
 
     function mostrarValor() {
 		if (document.getElementById('valor').value == "" || document.getElementById('desconto').value == ""){
-			
+
 		}else{
-			
+
 			var valor = parseFloat(document.getElementById('valor').value);
-			var desconto = parseInt(document.getElementById('desconto').value); 
+			var desconto = parseInt(document.getElementById('desconto').value);
 			var valor_desconto = parseFloat(document.getElementById('valor_desconto').value);
 			var resultado, total;
 			resultado = valor/100;
 			total = valor-(desconto*resultado);
-			
+
 			resultdesc = total ;
-			totaldesc = valor-(resultdesc);	
-			
+			totaldesc = valor-(resultdesc);
+
 			document.getElementById('valor').value = total.toFixed(2);
 			document.getElementById('valor_desconto').value = totaldesc.toFixed(2);
 			}
 	}
-	
+
     function mostrarValores() {
 		if (document.getElementById('valor').value == "" || document.getElementById('descontos').value == "" || document.getElementById('valor_desconto').value == ""){
-			
+
 		}else{
 			var valor = parseFloat(document.getElementById('valor').value);
-			var desconto = parseFloat(document.getElementById('descontos').value); 
+			var desconto = parseFloat(document.getElementById('descontos').value);
 			var valor_desconto = parseFloat(document.getElementById('valor_desconto').value);
 			var resultado, total;
 			resultado = valor;
 			total = valor-desconto;
-			
+
 			resultdesc = total ;
-			totaldesc = valor-(resultdesc);	
-			
+			totaldesc = valor-(resultdesc);
+
 			document.getElementById('valor').value = total.toFixed(2);
 			document.getElementById('valor_desconto').value = totaldesc.toFixed(2);
 			}
@@ -727,18 +727,18 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
 
     function mostrarValoresEditar() {
 		if (document.getElementById('valorEditar').value == "" || document.getElementById('descontos_editar').value == "" || document.getElementById('descontoEditar').value == ""){
-			
+
 		}else{
 			var valor = parseFloat(document.getElementById('valorEditar').value);
-			var desconto = parseFloat(document.getElementById('descontos_editar').value); 
+			var desconto = parseFloat(document.getElementById('descontos_editar').value);
 			var valor_desconto = parseFloat(document.getElementById('descontoEditar').value);
 			var resultado, total;
 			resultado = valor;
 			total = valor-desconto;
-			
+
 			resultdesc = total ;
-			totaldesc = valor-(resultdesc);	
-			
+			totaldesc = valor-(resultdesc);
+
 			document.getElementById('valorEditar').value = total.toFixed(2);
 			document.getElementById('descontoEditar').value = totaldesc.toFixed(2);
 			}
@@ -746,18 +746,18 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
 
     function mostrarValoresParc() {
 		if (document.getElementById('valor_parc').value == "" || document.getElementById('descontos_parc').value == "" || document.getElementById('desconto_parc').value == ""){
-			
+
 		}else{
 			var valor = parseFloat(document.getElementById('valor_parc').value);
-			var desconto = parseFloat(document.getElementById('descontos_parc').value); 
+			var desconto = parseFloat(document.getElementById('descontos_parc').value);
 			var valor_desconto = parseFloat(document.getElementById('desconto_parc').value);
 			var resultado, total;
 			resultado = valor;
 			total = valor-desconto;
-			
+
 			resultdesc = total ;
-			totaldesc = valor-(resultdesc);	
-			
+			totaldesc = valor-(resultdesc);
+
 			document.getElementById('valor_parc').value = total.toFixed(2);
 			document.getElementById('desconto_parc').value = totaldesc.toFixed(2);
 			}
@@ -906,7 +906,7 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
 
             $.ajax({
                 type: "POST",
-                url: "<?php echo base_url(); ?>index.php/financeiro/excluirLancamento",
+                url: "<?php echo base_url(); ?>financeiro/excluirLancamento",
                 data: "id=" + id,
                 dataType: 'json',
                 success: function(data) {
@@ -963,15 +963,15 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
         });
 
         $("#fornecedorEditar").autocomplete({
-            source: "<?php echo base_url(); ?>index.php/financeiro/autoCompleteClienteAddReceita",
+            source: "<?php echo base_url(); ?>financeiro/autoCompleteClienteAddReceita",
             minLength: 1,
             select: function(event, ui) {
                 $("#fornecedorEditar").val(ui.item.label);
             }
         });
-    
+
         $("#cliente").autocomplete({
-            source: "<?php echo base_url(); ?>index.php/financeiro/autoCompleteClienteAddReceita",
+            source: "<?php echo base_url(); ?>financeiro/autoCompleteClienteAddReceita",
             minLength: 1,
             select: function(event, ui) {
                 $("#cliente").val(ui.item.label);
@@ -980,7 +980,7 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
         });
 
           $("#cliente_busca").autocomplete({
-            source: "<?php echo base_url(); ?>index.php/financeiro/autoCompleteClienteAddReceita",
+            source: "<?php echo base_url(); ?>financeiro/autoCompleteClienteAddReceita",
             minLength: 1,
             select: function(event, ui) {
                 $("#cliente_busca").val(ui.item.label);
@@ -988,7 +988,7 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
         });
 
         $("#cliente_parc").autocomplete({
-            source: "<?php echo base_url(); ?>index.php/financeiro/autoCompleteClienteAddReceita",
+            source: "<?php echo base_url(); ?>financeiro/autoCompleteClienteAddReceita",
             minLength: 1,
             select: function(event, ui) {
                 $("#cliente_parc").val(ui.item.label);
@@ -996,7 +996,7 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
         });
 
         $("#fornecedor").autocomplete({
-            source: "<?php echo base_url(); ?>index.php/financeiro/autoCompleteClienteAddReceita",
+            source: "<?php echo base_url(); ?>financeiro/autoCompleteClienteAddReceita",
             minLength: 1,
             select: function(event, ui) {
                 $("#fornecedor").val(ui.item.label);
@@ -1009,7 +1009,7 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
 			var qtdparc = $("#qtdparcelas_parc").val();
 			var entrada = $("#entrada").val();
 			var result = (valor_parc - entrada) / qtdparc;
-			
+
 			if(qtdparc > 1){
 				if(entrada > 0){
 					$("#string_parc").text('R$ '+entrada+' de entrada mais '+qtdparc+' parcelas de R$ '+parseFloat(Math.round(result * 100) / 100).toFixed(2));
@@ -1043,7 +1043,7 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
 				$("#observacoes_parc").val($("#observacoes").val());
 				$("#valor_parc").val($("#valor").val());
 				$("#desconto_parc").val($("#valor_desconto").val());
-				$("#qtdparcelas_parc").val($("#qtdparcelas").val());		
+				$("#qtdparcelas_parc").val($("#qtdparcelas").val());
 			valorParcelas();
 			}
 			else{
@@ -1059,12 +1059,12 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
 					$("#observacoes_parc").val($("#observacoes").val());
 					$("#desconto_parc").val($("#valor_desconto").val());
 					$("#valor_parc").val($("#valor").val());
-					$("#qtdparcelas_parc").val(1);		
+					$("#qtdparcelas_parc").val(1);
 					valorParcelas();
 				}
 			}
 		});
-							
+
 		$('#valor_parc').keypress(function(event) {
 			valorParcelas();
 		});
@@ -1072,7 +1072,7 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
 		$('#qtdparcelas_parc').change(function(event) {
 			valorParcelas();
 		});
-		
+
 		$('#entrada').keypress(function(event){
 			valorParcelas();
 			var entrada = $("#entrada").val();
@@ -1082,15 +1082,15 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
 				$('#dia_pgto').css("color", "#eeeeee");
 			}
 		});
-		
+
 		$('#valor_parc, #qtdparcelas_parc, #formaPgto_parc, #entrada, #dia_pgto, #dia_base_pgto').click(function(event){
 			valorParcelas();
 		});
-		
+
 		$('#add_receita').mouseover(function(event){
 			valorParcelas();
 		});
-		
+
 		$('#entrada').keypress(function(event){
 			valorParcelas();
 			var entrada = $("#entrada").val();
@@ -1103,7 +1103,7 @@ echo number_format($soma_descontos_pagos, 2, ',', '.')?></strong></td>
 		$('#valor_parc, #qtdparcela_parc, #formaPgto_parc, #entrada, #dia_pgto, #dia_base_pgto').click(function(event){
 			valorParcelas();
 		});
-		
+
 		$('#add_receita').mouseover(function(event){
 			valorParcelas();
 		});

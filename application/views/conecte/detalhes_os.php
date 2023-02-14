@@ -349,6 +349,6 @@ foreach ($servicos as $s) {
         var link = $(this).attr('link');
         var id = $(this).attr('imagem');
         $("#div-visualizar-anexo").html('<img src="' + link + '" alt="">');
-        $("#download").attr('href', "<?php echo base_url(); ?>index.php/mine/downloadanexo/" + id);
+        $("#download").attr('href', "<?php echo base_url(); ?>mine/downloadanexo/" + id);
     });
 </script>

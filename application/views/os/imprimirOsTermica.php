@@ -29,16 +29,16 @@ $totalProdutos = 0; ?>
         <div class = "modal-header"><h4 class="modal-title">Deseja imprimir 2 vias ?</h4></div>
         <div class = "modal-body">
             <div class="formal-group">
-            <select value="" onchange="showEmpresa(this)">  
+            <select value="" onchange="showEmpresa(this)">
             <option value="sim">Sim</option>
-            <option value="nao">Não</option> 
+            <option value="nao">Não</option>
             </select>
             </div>
         </div>
         <div class = "modal-footer">
-        <button id="continue" class="button btn btn-mini btn-info" style="float: right;" onclick="closePopup()"><span class="button__text">Continuar</span></button> 
-        </div>    
-    </div> 
+        <button id="continue" class="button btn btn-mini btn-info" style="float: right;" onclick="closePopup()"><span class="button__text">Continuar</span></button>
+        </div>
+    </div>
 <div id ="principal" hidden >
     <div class="container-fluid">
         <div class="row-fluid">
@@ -48,16 +48,16 @@ $totalProdutos = 0; ?>
                     <div class="invoice-head" style="margin-bottom: 0">
                         <table class="table table-condensed">
                             <tbody>
-                            
+
 
                                 <?php if ($emitente == null) { ?>
-                                    
+
                                     <tr>
-                                        <td colspan="5" class="alert">Você precisa configurar os dados do emitente. >>><a href="<?php echo base_url(); ?>index.php/mapos/emitente">Configurar</a>
-                                            <<<</td> </tr> <?php } else { ?> 
+                                        <td colspan="5" class="alert">Você precisa configurar os dados do emitente. >>><a href="<?php echo base_url(); ?>mapos/emitente">Configurar</a>
+                                            <<<</td> </tr> <?php } else { ?>
                                     <td style="width: 25% ;text-align: center" ><img src=" <?php echo $emitente[0]->url_logo; ?> " style="max-height: 100px"></td>
                                     <tr>
-                                        
+
                                         <td colspan="5" style="text-align: center">
                                             <span style="font-size: 12px; ">CNPJ: <?php echo $emitente[0]->cnpj; ?> </br>
                                                 <?php echo $emitente[0]->rua . ', ' . $emitente[0]->numero . ' ' . $emitente[0]->bairro . ' -  ' . $emitente[0]->cidade . ' - ' . $emitente[0]->uf; ?> </span> </br> <span>Fone: <?php echo $emitente[0]->telefone; ?></span></td>
@@ -69,7 +69,7 @@ $totalProdutos = 0; ?>
                                 <?php } ?>
                             </tbody>
                         </table>
-    
+
                         <table class="table table-condensend">
                             <tbody>
                                 <tr>
@@ -124,7 +124,7 @@ $totalProdutos = 0; ?>
                                             <?php } ?>
                                         </td>
                                     <?php } ?>
-                                    
+
                                         <?php if ($result->descricaoProduto != null) { ?>
                                     <tr>
                                         <td colspan="5">
@@ -253,23 +253,23 @@ $totalProdutos = 0; ?>
                                 </tr>
                             </tbody>
                         </table>
-                      
+
                         <!-- Via Da Empresa  -->
                     <div id="ViaEmpresa" >
                         <div class="invoice-head" style="margin-bottom: 0">
 
                                 <table class="table table-condensed">
                                 <tbody>
-                            
+
 
                             <?php if ($emitente == null) { ?>
-                                
+
                                 <tr>
-                                    <td colspan="5" class="alert">Você precisa configurar os dados do emitente. >>><a href="<?php echo base_url(); ?>index.php/mapos/emitente">Configurar</a>
-                                        <<<</td> </tr> <?php } else { ?> 
+                                    <td colspan="5" class="alert">Você precisa configurar os dados do emitente. >>><a href="<?php echo base_url(); ?>mapos/emitente">Configurar</a>
+                                        <<<</td> </tr> <?php } else { ?>
                                 <td style="width: 25% ;text-align: center" ><img src=" <?php echo $emitente[0]->url_logo; ?> " style="max-height: 100px"></td>
                                 <tr>
-                                    
+
                                     <td colspan="5" style="text-align: center">
                                         <span style="font-size: 12px; ">CNPJ: <?php echo $emitente[0]->cnpj; ?> </br>
                                             <?php echo $emitente[0]->rua . ', ' . $emitente[0]->numero . ' ' . $emitente[0]->bairro . ' -  ' . $emitente[0]->cidade . ' - ' . $emitente[0]->uf; ?> </span> </br> <span>Fone: <?php echo $emitente[0]->telefone; ?></span></td>
@@ -336,7 +336,7 @@ $totalProdutos = 0; ?>
                                                     <?php } ?>
                                                 </td>
                                             <?php } ?>
-                                            
+
                                                 <?php if ($result->descricaoProduto != null) { ?>
                                             <tr>
                                                 <td colspan="5">
@@ -491,7 +491,7 @@ $totalProdutos = 0; ?>
                 document.getElementById('popup').style.display= "none";
                 document.getElementById('principal').style.display= "block";
                 document.getElementById('body').style.background='white' ;
-            window.print();  
+            window.print();
             }
     </script>
 
