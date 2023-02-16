@@ -128,9 +128,8 @@ foreach ($results as $r) {
             break;
     }
     $vencGarantia = '';
-
-    if ($r->garantia && is_numeric($r->garantia)) {
-        $vencGarantia = dateInterval($r->dataFinal, $r->garantia);
+    if (!empty(fData($r->dataFinal)) && $r->garantia && is_numeric($r->garantia)) {
+      $vencGarantia = dateInterval($r->dataFinal, $r->garantia);
     }
     $corGarantia = '';
     if (!empty($vencGarantia)) {
