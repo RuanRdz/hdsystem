@@ -326,7 +326,7 @@ class Mapos extends MY_Controller
         }
 
         $usuario = $this->mapos_model->getById($id);
-        
+
         if (is_file(FCPATH . 'assets/userImage/' . $usuario->url_image_user)) {
             unlink(FCPATH . 'assets/userImage/' . $usuario->url_image_user);
         }
@@ -334,7 +334,7 @@ class Mapos extends MY_Controller
         $image = $this->do_upload_user();
         $imageUserPath = $image;
         $retorno = $this->mapos_model->editImageUser($id, $imageUserPath);
-        
+
         if ($retorno) {
             $this->session->set_userdata('url_image_user', $imageUserPath);
             $this->session->set_flashdata('success', 'Foto alterada com sucesso.');
@@ -390,66 +390,67 @@ class Mapos extends MY_Controller
         redirect(site_url('mapos/emails/'));
     }
 
-    public function configurar()
-    {
-        if (!$this->permission->checkPermission($this->session->userdata('permissao'), 'cSistema')) {
-            $this->session->set_flashdata('error', 'Você não tem permissão para configurar o sistema');
-            redirect(base_url());
-        }
-        $this->data['menuConfiguracoes'] = 'Sistema';
+    public function configurar() {
+      if (!$this->permission->checkPermission($this->session->userdata('permissao'), 'cSistema')) {
+        $this->session->set_flashdata('error', 'Você não tem permissão para configurar o sistema');
+        redirect(base_url());
+      }
+      $this->data['menuConfiguracoes'] = 'Sistema';
 
-        $this->load->library('form_validation');
-        $this->load->model('mapos_model');
+      $this->load->library('form_validation');
+      $this->load->model('mapos_model');
 
-        $this->data['custom_error'] = '';
+      $this->data['custom_error'] = '';
 
-        $this->form_validation->set_rules('app_name', 'Nome do Sistema', 'required|trim');
-        $this->form_validation->set_rules('per_page', 'Registros por página', 'required|numeric|trim');
-        $this->form_validation->set_rules('app_theme', 'Tema do Sistema', 'required|trim');
-        $this->form_validation->set_rules('os_notification', 'Notificação de OS', 'required|trim');
-        $this->form_validation->set_rules('email_automatico', 'Enviar Email Automático', 'required|trim');
-        $this->form_validation->set_rules('control_estoque', 'Controle de Estoque', 'required|trim');
-        $this->form_validation->set_rules('notifica_whats', 'Notificação Whatsapp', 'required|trim');
-        $this->form_validation->set_rules('control_baixa', 'Controle de Baixa', 'required|trim');
-        $this->form_validation->set_rules('control_editos', 'Controle de Edição de OS', 'required|trim');
-        $this->form_validation->set_rules('control_edit_vendas', 'Controle de Edição de Vendas', 'required|trim');
-        $this->form_validation->set_rules('control_datatable', 'Controle de Visualização em DataTables', 'required|trim');
-        $this->form_validation->set_rules('os_status_list[]', 'Controle de visualização de OS', 'required|trim', ['required' => 'Selecione ao menos uma das opções!']);
-        $this->form_validation->set_rules('control_2vias', 'Controle Impressão 2 Vias', 'required|trim');
-        $this->form_validation->set_rules('pix_key', 'Chave Pix', 'trim|valid_pix_key', [
-            'valid_pix_key' => 'Chave Pix inválida!',
-        ]);
+      $this->form_validation->set_rules('app_name', 'Nome do Sistema', 'required|trim');
+      $this->form_validation->set_rules('per_page', 'Registros por página', 'required|numeric|trim');
+      $this->form_validation->set_rules('app_theme', 'Tema do Sistema', 'required|trim');
+      $this->form_validation->set_rules('os_notification', 'Notificação de OS', 'required|trim');
+      $this->form_validation->set_rules('email_automatico', 'Enviar Email Automático', 'required|trim');
+      $this->form_validation->set_rules('control_estoque', 'Controle de Estoque', 'required|trim');
+      $this->form_validation->set_rules('notifica_whats', 'Notificação Whatsapp', 'required|trim');
+      $this->form_validation->set_rules('control_baixa', 'Controle de Baixa', 'required|trim');
+      $this->form_validation->set_rules('control_editos', 'Controle de Edição de OS', 'required|trim');
+      $this->form_validation->set_rules('control_edit_vendas', 'Controle de Edição de Vendas', 'required|trim');
+      $this->form_validation->set_rules('control_datatable', 'Controle de Visualização em DataTables', 'required|trim');
+      $this->form_validation->set_rules('os_status_list[]', 'Controle de visualização de OS', 'required|trim', ['required' => 'Selecione ao menos uma das opções!']);
+      $this->form_validation->set_rules('control_2vias', 'Controle Impressão 2 Vias', 'required|trim');
+      $this->form_validation->set_rules('checklist_os', 'Checklist na abertura da OS', 'required|trim');
+      $this->form_validation->set_rules('pix_key', 'Chave Pix', 'trim|valid_pix_key', [
+        'valid_pix_key' => 'Chave Pix inválida!',
+      ]);
 
-        if ($this->form_validation->run() == false) {
-            $this->data['custom_error'] = (validation_errors() ? '<div class="alert">' . validation_errors() . '</div>' : false);
+      if ($this->form_validation->run() == false) {
+        $this->data['custom_error'] = (validation_errors() ? '<div class="alert">' . validation_errors() . '</div>' : false);
+      } else {
+        $data = [
+            'app_name' => $this->input->post('app_name')
+          , 'per_page' => $this->input->post('per_page')
+          , 'app_theme' => $this->input->post('app_theme')
+          , 'os_notification' => $this->input->post('os_notification')
+          , 'email_automatico' => $this->input->post('email_automatico')
+          , 'control_estoque' => $this->input->post('control_estoque')
+          , 'notifica_whats' => $this->input->post('notifica_whats')
+          , 'control_baixa' => $this->input->post('control_baixa')
+          , 'control_editos' => $this->input->post('control_editos')
+          , 'control_edit_vendas' => $this->input->post('control_edit_vendas')
+          , 'control_datatable' => $this->input->post('control_datatable')
+          , 'pix_key' => $this->input->post('pix_key')
+          , 'os_status_list' => json_encode($this->input->post('os_status_list'))
+          , 'control_2vias' => $this->input->post('control_2vias')
+          , 'checklist_os' => $this->input->post('checklist_os')
+        ];
+        if ($this->mapos_model->saveConfiguracao($data) == true) {
+          $this->session->set_flashdata('success', 'Configurações do sistema atualizadas com sucesso!');
+          redirect(site_url('mapos/configurar'));
         } else {
-            $data = [
-                'app_name' => $this->input->post('app_name'),
-                'per_page' => $this->input->post('per_page'),
-                'app_theme' => $this->input->post('app_theme'),
-                'os_notification' => $this->input->post('os_notification'),
-                'email_automatico' => $this->input->post('email_automatico'),
-                'control_estoque' => $this->input->post('control_estoque'),
-                'notifica_whats' => $this->input->post('notifica_whats'),
-                'control_baixa' => $this->input->post('control_baixa'),
-                'control_editos' => $this->input->post('control_editos'),
-                'control_edit_vendas' => $this->input->post('control_edit_vendas'),
-                'control_datatable' => $this->input->post('control_datatable'),
-                'pix_key' => $this->input->post('pix_key'),
-                'os_status_list' => json_encode($this->input->post('os_status_list')),
-                'control_2vias' => $this->input->post('control_2vias'),
-            ];
-            if ($this->mapos_model->saveConfiguracao($data) == true) {
-                $this->session->set_flashdata('success', 'Configurações do sistema atualizadas com sucesso!');
-                redirect(site_url('mapos/configurar'));
-            } else {
-                $this->data['custom_error'] = '<div class="alert">Ocorreu um errro.</div>';
-            }
+          $this->data['custom_error'] = '<div class="alert">Ocorreu um errro.</div>';
         }
+      }
 
-        $this->data['view'] = 'mapos/configurar';
+      $this->data['view'] = 'mapos/configurar';
 
-        return $this->layout();
+      return $this->layout();
     }
 
     public function atualizarBanco()

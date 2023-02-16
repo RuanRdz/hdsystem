@@ -135,7 +135,7 @@
                                             <input id="dataInicial" autocomplete="off" class="span12 datepicker" type="text" name="dataInicial" value="<?php echo date('d/m/Y', strtotime($result->dataInicial)); ?>" />
                                         </div>
                                         <div class="span3">
-                                            <label for="dataFinal">Data Final<span class="required">*</span></label>
+                                            <label for="dataFinal">Previsão de entrega</label>
                                             <input id="dataFinal" autocomplete="off" class="span12 datepicker" type="text" name="dataFinal" value="<?php echo date('d/m/Y', strtotime($result->dataFinal)); ?>" />
                                         </div>
                                         <div class="span3">
@@ -146,24 +146,34 @@
                                             <input id="termoGarantia" class="span12" type="text" name="termoGarantia" value="<?php echo $result->refGarantia ?>" />
                                             <input id="garantias_id" class="span12" type="hidden" name="garantias_id" value="<?php echo $result->garantias_id ?>" />
                                         </div>
+                                        <?php
+                                          if(!empty($configuration['checklist_os'])) {
+                                        ?>
+                                        <div class="span3" style="margin-left: 0px;">
+                                          <label for="status">Checklist</span></label>
+                                          <select name="checklists[]" multiple="multiple" class="multiplo span3">
+                                            <?php
+                                              $aChecklists = [];
+                                              foreach($this->os_model->getChecklists() as $oChecklist) {
+                                                $aChecklists[$oChecklist->idChecklist] = $oChecklist->nome;
+                                              }
+
+                                              $aSelecionados = array_map(function($oChecklist) {
+                                                return $oChecklist->idChecklist;
+                                              }, $checklists);
+                                              echo fOption($aChecklists, $aSelecionados);
+                                            ?>
+                                          </select>
+                                        </div>
+                                        <?php
+                                          }
+                                        ?>
                                     </div>
                                     <div class="span6" style="padding: 1%; margin-left: 0">
                                         <label for="descricaoProduto">
                                             <h4>Descrição Produto/Serviço</h4>
                                         </label>
                                         <textarea class="span12 editor" name="descricaoProduto" id="descricaoProduto" cols="30" rows="5"><?php echo $result->descricaoProduto ?></textarea>
-                                    </div>
-                                    <div class="span6" style="padding: 1%; margin-left: 0">
-                                        <label for="defeito">
-                                            <h4>Defeito</h4>
-                                        </label>
-                                        <textarea class="span12 editor" name="defeito" id="defeito" cols="30" rows="5"><?php echo $result->defeito ?></textarea>
-                                    </div>
-                                    <div class="span6" style="padding: 1%; margin-left: 0">
-                                        <label for="observacoes">
-                                            <h4>Observações</h4>
-                                        </label>
-                                        <textarea class="span12 editor" name="observacoes" id="observacoes" cols="30" rows="5"><?php echo $result->observacoes ?></textarea>
                                     </div>
                                     <div class="span6" style="padding: 1%; margin-left: 0">
                                         <label for="laudoTecnico">

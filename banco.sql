@@ -45,11 +45,11 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = latin1;
 
-CREATE TABLE `resets_de_senha` ( 
+CREATE TABLE `resets_de_senha` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `email` VARCHAR(200) NOT NULL , 
-  `token` VARCHAR(255) NOT NULL , 
-  `data_expiracao` DATETIME NOT NULL, 
+  `email` VARCHAR(200) NOT NULL ,
+  `token` VARCHAR(255) NOT NULL ,
+  `data_expiracao` DATETIME NOT NULL,
   `token_utilizado` TINYINT NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
@@ -605,6 +605,26 @@ CREATE TABLE IF NOT EXISTS `anotacoes_os` (
 );
 
 -- -----------------------------------------------------
+-- Table `checklist`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `checklists` (
+    `idChecklist` INT(11) NOT NULL AUTO_INCREMENT,
+    `nome` VARCHAR(255) NOT NULL ,
+    `modulo` ENUM('os') NOT NULL DEFAULT 'os',
+    `excluido` ENUM('S', 'N') NOT NULL DEFAULT 'N',
+    PRIMARY KEY (`idChecklist`)
+);
+
+-- -----------------------------------------------------
+-- Table `os_checklists`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `os_checklists` (
+    `idChecklist` INT(11) NOT NULL,
+    `idOs` INT(11) NOT NULL,
+    PRIMARY KEY (`idChecklist`, `idOs`)
+);
+
+-- -----------------------------------------------------
 -- Table `configuracoes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `configuracoes` ( `idConfig` INT NOT NULL AUTO_INCREMENT , `config` VARCHAR(20) NOT NULL UNIQUE, `valor` TEXT NULL , PRIMARY KEY (`idConfig`)) ENGINE = InnoDB;
@@ -630,7 +650,8 @@ INSERT INTO `configuracoes` (`idConfig`, `config`, `valor`) VALUES
 (12, 'os_status_list', '[\"Aberto\",\"Faturado\",\"Negocia\\u00e7\\u00e3o\",\"Em Andamento\",\"Or\\u00e7amento\",\"Finalizado\",\"Cancelado\",\"Aguardando Pe\\u00e7as\",\"Aprovado\"]'),
 (13, 'control_edit_vendas', '1'),
 (14, 'email_automatico', '1'),
-(15, 'control_2vias', '0');
+(15, 'control_2vias', '0'),
+(16, 'checklist_os', 0);
 
 INSERT INTO `permissoes` (`idPermissao`, `nome`, `permissoes`, `situacao`, `data`) VALUES
 (1, 'Administrador', 'a:53:{s:8:"aCliente";s:1:"1";s:8:"eCliente";s:1:"1";s:8:"dCliente";s:1:"1";s:8:"vCliente";s:1:"1";s:8:"aProduto";s:1:"1";s:8:"eProduto";s:1:"1";s:8:"dProduto";s:1:"1";s:8:"vProduto";s:1:"1";s:8:"aServico";s:1:"1";s:8:"eServico";s:1:"1";s:8:"dServico";s:1:"1";s:8:"vServico";s:1:"1";s:3:"aOs";s:1:"1";s:3:"eOs";s:1:"1";s:3:"dOs";s:1:"1";s:3:"vOs";s:1:"1";s:6:"aVenda";s:1:"1";s:6:"eVenda";s:1:"1";s:6:"dVenda";s:1:"1";s:6:"vVenda";s:1:"1";s:9:"aGarantia";s:1:"1";s:9:"eGarantia";s:1:"1";s:9:"dGarantia";s:1:"1";s:9:"vGarantia";s:1:"1";s:8:"aArquivo";s:1:"1";s:8:"eArquivo";s:1:"1";s:8:"dArquivo";s:1:"1";s:8:"vArquivo";s:1:"1";s:10:"aPagamento";N;s:10:"ePagamento";N;s:10:"dPagamento";N;s:10:"vPagamento";N;s:11:"aLancamento";s:1:"1";s:11:"eLancamento";s:1:"1";s:11:"dLancamento";s:1:"1";s:11:"vLancamento";s:1:"1";s:8:"cUsuario";s:1:"1";s:9:"cEmitente";s:1:"1";s:10:"cPermissao";s:1:"1";s:7:"cBackup";s:1:"1";s:10:"cAuditoria";s:1:"1";s:6:"cEmail";s:1:"1";s:8:"cSistema";s:1:"1";s:8:"rCliente";s:1:"1";s:8:"rProduto";s:1:"1";s:8:"rServico";s:1:"1";s:3:"rOs";s:1:"1";s:6:"rVenda";s:1:"1";s:11:"rFinanceiro";s:1:"1";s:9:"aCobranca";s:1:"1";s:9:"eCobranca";s:1:"1";s:9:"dCobranca";s:1:"1";s:9:"vCobranca";s:1:"1";}', 1, 'admin_created_at');

@@ -374,4 +374,18 @@ class Os_model extends CI_Model
 
         return $pix->getQRCode();
     }
+
+  /**
+   * Retorna um array com os checklists cadastrados no sistema
+   *
+   * @return array
+   */
+  public function getChecklists() {
+    $this->db->select('checklists.*');
+    $this->db->from('checklists');
+    $this->db->where('checklists.excluido', 'N');
+    $this->db->order_by('checklists.nome');
+
+    return $this->db->get()->result();
+  }
 }

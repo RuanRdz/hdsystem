@@ -43,6 +43,7 @@ class MY_Controller extends CI_Controller
             redirect('login');
         }
         $this->load_configuration();
+        $this->CI->load->helper('funcoes');
     }
 
     private function load_configuration()

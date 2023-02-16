@@ -184,7 +184,7 @@ $config = [
         [
             'field' => 'dataFinal',
             'label' => 'DataFinal',
-            'rules' => 'trim|required',
+            'rules' => 'trim',
         ],
         [
             'field' => 'garantia',
@@ -450,5 +450,12 @@ $config = [
             'label' => 'gateway_de_pagamento',
             'rules' => 'required|trim',
         ],
+    ],
+    'checklist' => [
+      [
+        'field' => 'nome',
+        'label' => 'nome',
+        'rules' => 'required|trim',
+      ],
     ],
 ];

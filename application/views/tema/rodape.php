@@ -1,5 +1,9 @@
-<script src="<?= base_url(); ?>assets/js/bootstrap.min.js"></script>
-<script src="<?= base_url(); ?>assets/js/matrix.js"></script>
+<script src="<?= base_url() ?>assets/js/bootstrap.min.js"></script>
+
+<script src="<?= base_url() ?>assets/js/matrix.js"></script>
+<script src="<?= base_url() ?>assets/js/jquery.multiselect.js"></script>
+<script src="<?= base_url() ?>assets/js/jquery.multiselect.filter.js"></script>
+<script src="<?= base_url() ?>assets/js/jquery.livequery.js"></script>
 </body>
 <script type="text/javascript">
     $(document).ready(function() {

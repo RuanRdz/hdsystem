@@ -99,41 +99,52 @@ class Os extends MY_Controller
                 if ($dataFinal) {
                     $dataFinal = explode('/', $dataFinal);
                     $dataFinal = $dataFinal[2] . '-' . $dataFinal[1] . '-' . $dataFinal[0];
-                } else {
-                    $dataFinal = date('Y/m/d');
                 }
 
                 $termoGarantiaId = (!$termoGarantiaId == null || !$termoGarantiaId == '')
                     ? $this->input->post('garantias_id')
                     : null;
             } catch (Exception $e) {
-                $dataInicial = date('Y/m/d');
-                $dataFinal = date('Y/m/d');
+              $dataInicial = date('Y/m/d');
             }
-
             $data = [
-                'dataInicial' => $dataInicial,
-                'clientes_id' => $this->input->post('clientes_id'), //set_value('idCliente'),
-                'usuarios_id' => $this->input->post('usuarios_id'), //set_value('idUsuario'),
-                'dataFinal' => $dataFinal,
-                'garantia' => set_value('garantia'),
-                'garantias_id' => $termoGarantiaId,
-                'descricaoProduto' => set_value('descricaoProduto'),
-                'defeito' => set_value('defeito'),
-                'status' => set_value('status'),
-                'observacoes' => set_value('observacoes'),
-                'laudoTecnico' => set_value('laudoTecnico'),
-                'faturado' => 0,
+              'dataInicial' => $dataInicial,
+              'clientes_id' => $this->input->post('clientes_id'), //set_value('idCliente'),
+              'usuarios_id' => $this->input->post('usuarios_id'), //set_value('idUsuario'),
+              'dataFinal' => $dataFinal,
+              'garantia' => set_value('garantia'),
+              'garantias_id' => $termoGarantiaId,
+              'descricaoProduto' => set_value('descricaoProduto'),
+              'defeito' => set_value('defeito'),
+              'status' => set_value('status'),
+              'observacoes' => set_value('observacoes'),
+              'laudoTecnico' => set_value('laudoTecnico'),
+              'faturado' => 0
             ];
 
             if (is_numeric($id = $this->os_model->add('os', $data, true))) {
                 $this->load->model('mapos_model');
                 $this->load->model('usuarios_model');
+                $this->load->model('oschecklist_model');
 
                 $idOs = $id;
                 $os = $this->os_model->getById($idOs);
                 $emitente = $this->mapos_model->getEmitente()[0];
                 $tecnico = $this->usuarios_model->getById($os->usuarios_id);
+
+                // verifica a configuração de checklist
+                if($this->data['configuration']['checklist_os'] == 1) {
+                  $this->oschecklist_model->deleteFromOs($idOs);
+                  if(!empty($this->input->post('checklists'))) {
+                    foreach($this->input->post('checklists') as $idChecklist) {
+                      $aData = [
+                        'idOs' => $idOs
+                        , 'idChecklist' => $idChecklist
+                      ];
+                      $this->oschecklist_model->add($aData);
+                    }
+                  }
+                }
 
                 // Verificar configuração de notificação
                 if ($this->data['configuration']['os_notification'] != 'nenhum' && $this->data['configuration']['email_automatico'] == 1) {
@@ -240,12 +251,27 @@ class Os extends MY_Controller
             if ($this->os_model->edit('os', $data, 'idOs', $this->input->post('idOs')) == true) {
                 $this->load->model('mapos_model');
                 $this->load->model('usuarios_model');
+                $this->load->model('oschecklist_model');
 
                 $idOs = $this->input->post('idOs');
 
                 $os = $this->os_model->getById($idOs);
                 $emitente = $this->mapos_model->getEmitente()[0];
                 $tecnico = $this->usuarios_model->getById($os->usuarios_id);
+
+                // verifica a configuração de checklist
+                if($this->data['configuration']['checklist_os'] == 1) {
+                  $this->oschecklist_model->deleteFromOs($idOs);
+                  if(!empty($this->input->post('checklists'))) {
+                    foreach($this->input->post('checklists') as $idChecklist) {
+                      $aData = [
+                        'idOs' => $idOs
+                        , 'idChecklist' => $idChecklist
+                      ];
+                      $this->oschecklist_model->add($aData);
+                    }
+                  }
+                }
 
                 // Verificar configuração de notificação
                 if ($this->data['configuration']['os_notification'] != 'nenhum' && $this->data['configuration']['email_automatico'] == 1) {
@@ -295,6 +321,9 @@ class Os extends MY_Controller
         $this->load->model('mapos_model');
         $this->data['emitente'] = $this->mapos_model->getEmitente();
 
+        $this->load->model('oschecklist_model');
+        $this->data['checklists'] = $this->oschecklist_model->getChecklists($this->uri->segment(3));
+
         $this->data['view'] = 'os/editarOs';
         return $this->layout();
     }
@@ -315,6 +344,7 @@ class Os extends MY_Controller
         $this->data['texto_de_notificacao'] = $this->data['configuration']['notifica_whats'];
 
         $this->load->model('mapos_model');
+        $this->load->model('oschecklist_model');
         $this->data['result'] = $this->os_model->getById($this->uri->segment(3));
         $this->data['produtos'] = $this->os_model->getProdutos($this->uri->segment(3));
         $this->data['servicos'] = $this->os_model->getServicos($this->uri->segment(3));
@@ -330,6 +360,7 @@ class Os extends MY_Controller
             ],
             true
         );
+        $this->data['checklists'] = $this->oschecklist_model->getChecklists($this->uri->segment(3));
         $this->data['view'] = 'os/visualizarOs';
 
         if ($return = $this->os_model->valorTotalOS($this->uri->segment(3))) {
@@ -354,6 +385,7 @@ class Os extends MY_Controller
 
         $this->data['custom_error'] = '';
         $this->load->model('mapos_model');
+        $this->load->model('oschecklist_model');
         $this->data['result'] = $this->os_model->getById($this->uri->segment(3));
         $this->data['produtos'] = $this->os_model->getProdutos($this->uri->segment(3));
         $this->data['servicos'] = $this->os_model->getServicos($this->uri->segment(3));
@@ -363,6 +395,7 @@ class Os extends MY_Controller
             $this->data['configuration']['pix_key'],
             $this->data['emitente'][0]
         );
+        $this->data['checklists'] = $this->oschecklist_model->getChecklists($this->uri->segment(3));
 
         $this->load->view('os/imprimirOs', $this->data);
     }
@@ -381,10 +414,12 @@ class Os extends MY_Controller
 
         $this->data['custom_error'] = '';
         $this->load->model('mapos_model');
+        $this->load->model('oschecklist_model');
         $this->data['result'] = $this->os_model->getById($this->uri->segment(3));
         $this->data['produtos'] = $this->os_model->getProdutos($this->uri->segment(3));
         $this->data['servicos'] = $this->os_model->getServicos($this->uri->segment(3));
         $this->data['emitente'] = $this->mapos_model->getEmitente();
+        $this->data['checklists'] = $this->oschecklist_model->getChecklists($this->uri->segment(3));
 
         $this->load->view('os/imprimirOsTermica', $this->data);
     }

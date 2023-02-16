@@ -241,6 +241,36 @@ $totalProdutos = 0; ?>
                                 </tr>
                             </tbody>
                         </table>
+
+                        <?php
+                          if(!empty($checklists)) {
+                            $sTagTable = '
+                              <table style="font-size: 11px; border-bottom: 1px solid #ddd;" class="table table-condensed">
+                                <thead>
+                                  <tr>
+                                    <th>Itens informados na abertura da OS</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>
+                                    %s
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            ';
+
+                            $sTagTable = sprintf(
+                              $sTagTable
+                              , implode(', ', array_map(function($oChecklist) {
+                                return $oChecklist->nome;
+                              }, $checklists))
+                            );
+                            echo $sTagTable;
+                          }
+                        ?>
+
                         <table class="table table-bordered table-condensed" style="font-size: 15px">
                             <tbody>
                                 <tr>

@@ -30,6 +30,9 @@
   <?php if ($configuration['app_theme'] == 'whiteblack') { ?>
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/tema-white-black.css" />
   <?php } ?>
+  <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/custom.scss">
+  <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/jquery.multiselect.css">
+  <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/jquery.multiselect.filter.css">
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;500;700&display=swap' rel='stylesheet' type='text/css'>
   <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
@@ -78,7 +81,6 @@
       <li class="dropdown">
         <a href="#" class="tip-right dropdown-toggle" data-toggle="dropdown" title="Perfis"><i class='bx bx-user-circle iconN'></i><span class="text"></span></a>
         <ul class="dropdown-menu">
-        <li class=""><a title="Área do Cliente" href="<?= site_url(); ?>/mine" target="_blank"> <span class="text">Área do Cliente</span></a></li>
           <li class=""><a title="Meu Perfil" href="<?= site_url('mapos/minhaConta'); ?>"><span class="text">Meu Perfil</span></a></li>
           <li class="divider"></li>
           <li class=""><a title="Sair do Sistema" href="<?= site_url('login/sair'); ?>"><i class='bx bx-log-out-circle'></i> <span class="text">Sair do Sistema</span></a></li>
@@ -106,7 +108,6 @@
         <li><a href="<?= site_url('permissoes') ?>">Permissões</a></li>
         <li><a href="<?= site_url('auditoria') ?>">Auditoria</a></li>
         <li><a href="<?= site_url('mapos/emails') ?>">Emails</a></li>
-        <li><a href="<?= site_url('mapos/backup') ?>">Backup</a></li>
         </ul>
       </li>
 <!-- Start Fullscreen -->

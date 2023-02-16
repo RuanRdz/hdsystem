@@ -179,26 +179,59 @@
                                 <?php } ?>
                             </tbody>
                         </table>
+                        <?php
+                          if(!empty($checklists)) {
+                            $sTagTable = '
+                              <table class="table table-bordered">
+                                <thead>
+                                  <tr>
+                                    <th>Itens informados na abertura da OS</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>
+                                    %s
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            ';
+                            printf(
+                              $sTagTable
+                              , implode(', ', array_map(function($oChecklist) {
+                                return $oChecklist->nome;
+                              }, $checklists))
+                            );
+                          }
+                        ?>
                         <table class="table table-bordered">
-                            <thead>
+                          <thead>
+                            <tr>
+                              <th>Anotação</th>
+                              <th>Data/Hora</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <?php
+                              $sTagAnotacao = '
                                 <tr>
-                                    <th>Anotação</th>
-                                    <th>Data/Hora</th>
+                                  <td>%s</td>
+                                  <td>%s</td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                                    foreach ($anotacoes as $a) {
-                                                        echo '<tr>';
-                                                        echo '<td>' . $a->anotacao . '</td>';
-                                                        echo '<td>' . date('d/m/Y H:i:s', strtotime($a->data_hora)) . '</td>';
-                                                        echo '</tr>';
-                                                    }
-                                                    if (!$anotacoes) {
-                                                        echo '<tr><td colspan="2">Nenhuma anotação cadastrada</td></tr>';
-                                                    }
-?>
-                            </tbody>
+                              ';
+                              foreach ($anotacoes as $a) {
+                                printf(
+                                  $sTagAnotacao
+                                  , $a->anotacao
+                                  , fData($a->data_hora)
+                                );
+                              }
+                              if (!$anotacoes) {
+                                echo '<tr><td colspan="2">Nenhuma anotação cadastrada</td></tr>';
+                              }
+                            ?>
+                          </tbody>
                         </table>
                         <?php if ($produtos != null) { ?>
                             <br />

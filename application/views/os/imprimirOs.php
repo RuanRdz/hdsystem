@@ -269,6 +269,33 @@ $totalProdutos = 0; ?>
                                         echo $result->valor_desconto != 0 ? "<h4 style='text-align: right'> Desconto: R$ " . number_format($result->valor_desconto != 0 ? $result->valor_desconto - ($totalProdutos + $totalServico) : 0.00, 2, ',', '.') . "</h4>" : "";
                                         echo $result->valor_desconto != 0 ? "<h4 style='text-align: right'> Total com Desconto: R$ " . number_format($result->valor_desconto, 2, ',', '.') . "</h4>" : "";
                                     }
+
+                                    if(!empty($checklists)) {
+                                      $sTagTable = '
+                                        <table class="table table-bordered table-condensed">
+                                          <thead>
+                                            <tr>
+                                              <th>Itens informados na abertura da OS</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            <tr>
+                                              <td>
+                                              %s
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      ';
+
+                                      $sTagTable = sprintf(
+                                        $sTagTable
+                                        , implode(', ', array_map(function($oChecklist) {
+                                          return $oChecklist->nome;
+                                        }, $checklists))
+                                      );
+                                      echo $sTagTable;
+                                    }
 ?>
                                     <table class="table table-bordered table-condensed">
                                         <tbody>
@@ -489,7 +516,34 @@ $totalProdutos = 0; ?>
                                         echo $result->valor_desconto != 0 ? "<h4 style='text-align: right'> Desconto: R$ " . number_format($result->valor_desconto != 0 ? $result->valor_desconto - ($totalProdutos + $totalServico) : 0.00, 2, ',', '.') . "</h4>" : "";
                                         echo $result->valor_desconto != 0 ? "<h4 style='text-align: right'> Total com Desconto: R$ " . number_format($result->valor_desconto, 2, ',', '.') . "</h4>" : "";
                                     }
-?>
+
+                                    if(!empty($checklists)) {
+                                      $sTagTable = '
+                                        <table class="table table-bordered table-condensed">
+                                          <thead>
+                                            <tr>
+                                              <th>Itens informados na abertura da OS</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            <tr>
+                                              <td>
+                                              %s
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      ';
+
+                                      $sTagTable = sprintf(
+                                        $sTagTable
+                                        , implode(', ', array_map(function($oChecklist) {
+                                          return $oChecklist->nome;
+                                        }, $checklists))
+                                      );
+                                      echo $sTagTable;
+                                    }
+                                  ?>
                                     <table class="table table-bordered table-condensed">
                                         <tbody>
                                             <tr>

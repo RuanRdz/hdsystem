@@ -1,15 +1,7 @@
 <?php
-class Mapos_model extends CI_Model
-{
-    /**
-     * author: Ramon Silva
-     * email: silva018-mg@yahoo.com.br
-     *
-     */
-
-    public function __construct()
-    {
-        parent::__construct();
+class Mapos_model extends CI_Model {
+    public function __construct() {
+      parent::__construct();
     }
 
     public function get($table, $fields, $where = '', $perpage = 0, $start = 0, $one = false, $array = 'array')
@@ -378,4 +370,18 @@ class Mapos_model extends CI_Model
         }
         return true;
     }
+
+  /**
+   * Retorna um array com os checklists cadastrados no sistema
+   *
+   * @return array
+   */
+  public function getChecklists() {
+    $this->db->select('checklists.*');
+    $this->db->from('checklists');
+    $this->db->where('checklists.excluido', 'N');
+    $this->db->order_by('checklists.nome');
+
+    return $this->db->get()->result();
+  }
 }
