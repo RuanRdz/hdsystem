@@ -1,5 +1,5 @@
 <?php
-  class OsChecklist_model extends CI_Model {
+  class Oschecklist_model extends CI_Model {
     public function __construct() {
       parent::__construct();
     }

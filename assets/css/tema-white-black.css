@@ -19,6 +19,50 @@ select[class*="span"],
     font-weight: 600;
 }
 
+button.ui-multiselect {
+  background  : var(--white-blak-side);
+  border-color: var(--cinza0);
+  color       : var(--white-blak);
+  box-shadow  : 0 4px 17px rgb(0 0 0 / 10%);
+}
+
+.ui-multiselect-checkboxes label:hover {
+  background  : var(--cinza0);
+  color       : var(--white-blak);
+  border: none;
+  font-weight: normal;
+}
+
+div.ui-multiselect-menu {
+  background  : var(--white-blak-side);
+  color       : var(--white-blak);
+}
+
+.ui-multiselect-checkboxes .ui-multiselect-optgroup a {
+  cursor: pointer;
+  display: inline-block;
+  width: 100%;
+  margin: 0px 0;
+  padding: 9px 10px;
+  font-size: 13px;
+  text-decoration: none;
+  color: var(--white-blak);
+  font-weight: 700;
+  text-align: left;
+  letter-spacing: 0px;
+  background: var(--white-blak-side);
+  font-family: 'Open Sans', sans-serif;border: 0px;
+}
+.ui-multiselect-checkboxes .ui-multiselect-optgroup a:hover {
+  background: var(--cinza0);
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover{
+  background: var(--white-blak-side);
+  color: var(--white-blak);
+  border: 0;
+}
+
 h1, h2, h3, h4, h6 {
     color      : var(--white-blak);
     font-weight: 600;
