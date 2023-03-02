@@ -551,8 +551,8 @@ class Mapos extends MY_Controller
                 'extendedProps' => [
                     'id' => $os->idOs,
                     'cliente' => '<b>Cliente:</b> ' . $os->nomeCliente,
-                    'dataInicial' => '<b>Data Inicial:</b> ' . $os->dataInicial,
-                    'dataFinal' => '<b>Data Final:</b> ' . $os->dataFinal,
+                    'dataInicial' => '<b>Data Inicial:</b> ' . fData($os->dataInicial),
+                    'dataFinal' => '<b>Data Final:</b> ' . fData($os->dataFinal),
                     'garantia' => '<b>Garantia:</b> ' . $os->garantia,
                     'status' => '<b>Status da OS:</b> ' . $os->status,
                     'description' => '<b>Descrição/Produto:</b> ' . $os->descricaoProduto,

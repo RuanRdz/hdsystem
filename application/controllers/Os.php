@@ -1,4 +1,8 @@
-<?php if (!defined('BASEPATH')) {
+<?php
+
+use Mpdf\Tag\Em;
+
+ if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 
@@ -88,25 +92,19 @@ class Os extends MY_Controller
         if ($this->form_validation->run('os') == false) {
             $this->data['custom_error'] = (validation_errors() ? true : false);
         } else {
-            $dataInicial = $this->input->post('dataInicial');
-            $dataFinal = $this->input->post('dataFinal');
-            $termoGarantiaId = $this->input->post('termoGarantia');
+            $dataInicial = fData($this->input->post('dataInicial'), 'G');
+            $dataFinal = fData($this->input->post('dataFinal'), 'G');
 
-            try {
-                $dataInicial = explode('/', $dataInicial);
-                $dataInicial = $dataInicial[2] . '-' . $dataInicial[1] . '-' . $dataInicial[0];
-
-                if ($dataFinal) {
-                    $dataFinal = explode('/', $dataFinal);
-                    $dataFinal = $dataFinal[2] . '-' . $dataFinal[1] . '-' . $dataFinal[0];
-                }
-
-                $termoGarantiaId = (!$termoGarantiaId == null || !$termoGarantiaId == '')
-                    ? $this->input->post('garantias_id')
-                    : null;
-            } catch (Exception $e) {
-              $dataInicial = date('Y/m/d');
+            if(empty($dataInicial)) {
+              $dataInicial = date('Y-m-d');
             }
+            if(empty($dataFinal)) {
+              $dataFinal = date('Y-m-d', strtotime("+7 day", strtotime($dataInicial)));
+            }
+
+            $termoGarantiaId = $this->input->post('termoGarantia');
+            $termoGarantiaId = (!empty($termoGarantiaId)) ? $this->input->post('garantias_id') : null;
+
             $data = [
               'dataInicial' => $dataInicial,
               'clientes_id' => $this->input->post('clientes_id'), //set_value('idCliente'),
@@ -209,18 +207,15 @@ class Os extends MY_Controller
         if ($this->form_validation->run('os') == false) {
             $this->data['custom_error'] = (validation_errors() ? '<div class="form_error">' . validation_errors() . '</div>' : false);
         } else {
-            $dataInicial = $this->input->post('dataInicial');
-            $dataFinal = $this->input->post('dataFinal');
+            $dataInicial = fData($this->input->post('dataInicial'), 'G');
+            $dataFinal = fData($this->input->post('dataFinal'), 'G');
             $termoGarantiaId = $this->input->post('garantias_id') ?: null;
 
-            try {
-                $dataInicial = explode('/', $dataInicial);
-                $dataInicial = $dataInicial[2] . '-' . $dataInicial[1] . '-' . $dataInicial[0];
-
-                $dataFinal = explode('/', $dataFinal);
-                $dataFinal = $dataFinal[2] . '-' . $dataFinal[1] . '-' . $dataFinal[0];
-            } catch (Exception $e) {
-                $dataInicial = date('Y/m/d');
+            if(empty($dataInicial)) {
+              $dataInicial = date('Y-m-d');
+            }
+            if(empty($dataFinal)) {
+              $dataFinal = date('Y-m-d', strtotime("+7 day", strtotime($dataInicial)));
             }
 
             $data = [
