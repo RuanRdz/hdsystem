@@ -99,7 +99,7 @@ class Os extends MY_Controller
               $dataInicial = date('Y-m-d');
             }
             if(empty($dataFinal)) {
-              $dataFinal = date('Y-m-d', strtotime("+7 day", strtotime($dataInicial)));
+              $dataFinal = date('Y-m-d', strtotime("+7 weekdays", strtotime($dataInicial)));
             }
 
             $termoGarantiaId = $this->input->post('termoGarantia');
@@ -215,7 +215,7 @@ class Os extends MY_Controller
               $dataInicial = date('Y-m-d');
             }
             if(empty($dataFinal)) {
-              $dataFinal = date('Y-m-d', strtotime("+7 day", strtotime($dataInicial)));
+              $dataFinal = date('Y-m-d', strtotime("+7 weekdays", strtotime($dataInicial)));
             }
 
             $data = [
