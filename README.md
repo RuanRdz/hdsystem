@@ -1,3 +1,4 @@
+Copiado o projeto open source do Mapos para implantação em uma Loja de eletrônicos.
 
 ![MapOS](https://raw.githubusercontent.com/RamonSilva20/mapos/master/assets/img/logo.png)
 
